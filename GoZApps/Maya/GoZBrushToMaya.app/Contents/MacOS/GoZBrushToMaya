@@ -1,22 +1,58 @@
 #!/usr/bin/python
 
 import socket
-maya = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-maya.connect(('localhost', 6667))
+import os.path
+import time
+import subprocess
 
+
+
+
+cfgPath="/Users/Shared/Pixologic/GoZApps/Maya/config.txt"
+cfg=open(cfgPath,"r")
+
+for line in cfg:
+    if(line[0:2]=='IP'):
+        ip=line[3:].split('\n')[0]
+    if(line[0:4]=='PORT'):
+        port=int(line[5:].split('\n')[0])
+    if(line[0:4]=='PATH'):
+        path=line[5:].split('\n')[0]
 
 path = "/Users/Shared/Pixologic/GoZBrush/GoZ_ObjectList.txt"
-f=open(path,path)
+f=open(path,"r")
 
 asciiFile=f.readline().split('\n')[0]+'.ma'
+
+maya = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+maya.connect((ip, port))
 
 mayaCMD='import maya.cmds as cmds'
 mayaCMD+='\n'
 mayaCMD+='print "SENT"'
 mayaCMD+='\n'
 mayaCMD+='cmds.file('+'"'+asciiFile+'"'+',i=True,gr=True,ignoreVersion=True,ra=True,rdn=True,type="mayaAscii")'
-
-print asciiFile
+mayaCMD+='\n'
+mayaCMD+='cmds.spaceLocator(n="GoZID")'
+mayaCMD+='\n'
+mayaCMD+='cmds.select("GoZID")'
+mayaCMD+='\n'
+mayaCMD+='cmds.addAttr( longName="path", dt="string")'
+mayaCMD+='\n'
+mayaCMD+='cmds.setAttr("GoZID.path","'+asciiFile+'",type="string",lock=True)'
 
 maya.send(mayaCMD)
 maya.close()
+
+
+t1= (os.path.getmtime(asciiFile))
+t2= t1
+
+try:
+    while(t1==t2):
+        t2=(os.path.getmtime(asciiFile))
+        print t1,t2
+except:
+    print "NEW"
+    time.sleep(6)
+    subprocess.call(['/Users/Shared/Pixologic/GoZBrush/GoZBrushFromApp.app/Contents/MacOS/GoZBrushFromApp'])
