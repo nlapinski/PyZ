@@ -1,0 +1,3 @@
+#basic GOZ config paths 
+
+#/network/path
