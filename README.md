@@ -1,4 +1,6 @@
 PyZ
 ===
 
-Python interface for connecting Zbrush to Maya's command port to emulate GoZ functionality
+Patch to modify GoZ to work over commandport
+
+patch can be applied to /Users/Shared/Pixologic/ for OSX
