@@ -1,0 +1,22 @@
+#!/usr/bin/python
+
+import socket
+maya = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+maya.connect(('localhost', 6667))
+
+
+path = "/Users/Shared/Pixologic/GoZBrush/GoZ_ObjectList.txt"
+f=open(path,path)
+
+asciiFile=f.readline().split('\n')[0]+'.ma'
+
+mayaCMD='import maya.cmds as cmds'
+mayaCMD+='\n'
+mayaCMD+='print "SENT"'
+mayaCMD+='\n'
+mayaCMD+='cmds.file('+'"'+asciiFile+'"'+',i=True,gr=True,ignoreVersion=True,ra=True,rdn=True,type="mayaAscii")'
+
+print asciiFile
+
+maya.send(mayaCMD)
+maya.close()

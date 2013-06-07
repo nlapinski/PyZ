@@ -1,0 +1,5 @@
+#basic GOZ config paths 
+#/network/path
+PATH="/network/share/folder/project"
+IP="localhost"
+PORT="6667"
