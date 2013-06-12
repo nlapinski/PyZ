@@ -13,9 +13,10 @@ cfg=open(cfgPath,"r")
 
 for line in cfg:
     if(line[0:2]=='IP'):
-        ip=line[3:].split('\n')[0]
+        ip=line[3:].split('\n')[0].replace('"','')
     if(line[0:4]=='PORT'):
-        port=int(line[5:].split('\n')[0])
+        port=int(line[5:].split('\n')[0]).replace('"','')
+	port=int(port)
     if(line[0:4]=='PATH'):
         path=line[5:].split('\n')[0]
 
@@ -54,5 +55,5 @@ try:
         print t1,t2
 except:
     print "NEW"
-    time.sleep(6)
-    subprocess.call(['/Users/Shared/Pixologic/GoZBrush/GoZBrushFromApp.app/Contents/MacOS/GoZBrushFromApp'])
+    while(os.path.isfile(asciiFile)==False):
+    	subprocess.call(['/Users/Shared/Pixologic/GoZBrush/GoZBrushFromApp.app/Contents/MacOS/GoZBrushFromApp'])
