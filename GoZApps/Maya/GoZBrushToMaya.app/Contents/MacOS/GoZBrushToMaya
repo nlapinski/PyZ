@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import socket
-import os.path
+import os
 import time
 import subprocess
 
@@ -57,11 +57,16 @@ maya.close()
 t1= (os.path.getmtime(asciiFile))
 t2= t1
 
-try:
-    while(t1==t2):
-        t2=(os.path.getmtime(asciiFile))
-        #print t1,t2
-except:
-    print "NEW"
-    while(os.path.isfile(asciiFile)==False):
-    	subprocess.call(['/Users/Shared/Pixologic/GoZBrush/GoZBrushFromApp.app/Contents/MacOS/GoZBrushFromApp'])
+#while(t1==t2):
+#    t2=(os.path.getmtime(asciiFile))
+#    print t1,t2
+tmp = asciiFile+'.aaa'
+print tmp
+
+while(os.path.isfile(tmp)==False):
+    print "back"
+
+
+if(os.path.isfile(tmp)==True):
+    subprocess.call(['/Users/Shared/Pixologic/GoZBrush/GoZBrushFromApp.app/Contents/MacOS/GoZBrushFromApp'])
+    os.remove(tmp)
