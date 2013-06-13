@@ -1,5 +1,7 @@
 #basic GOZ config paths 
 #/network/path
 PATH="/network/share/folder/project"
-IP="localhost"
+IP="129.25.140.197"
 PORT="6667"
+SSHUSER="renderthis"
+SSHPASS="!!ASAP!!"
