@@ -2,7 +2,6 @@
 #/network/path
 PATH="/home/renderthis/.gvfs/digmgrad on digmvault.comad.drexel.edu/nkl32/default/"
 IP="129.25.140.197"
-#IP="DIGM2012"
 PORT="6667"
 SSHUSER="renderthis"
 SSHPASS="!!ASAP!!"
