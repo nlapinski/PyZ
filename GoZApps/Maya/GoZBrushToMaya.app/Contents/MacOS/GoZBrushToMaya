@@ -5,8 +5,9 @@ import os.path
 import time
 import subprocess
 
+#goz pp
 
-
+gozp='../../../../../GoZBrush/GoZ_ProjectPath.txt'
 
 cfgPath="/Users/Shared/Pixologic/GoZApps/Maya/config.txt"
 cfg=open(cfgPath,"r")
@@ -14,25 +15,32 @@ cfg=open(cfgPath,"r")
 for line in cfg:
     if(line[0:2]=='IP'):
         ip=line[3:].split('\n')[0].replace('"','')
+	print ip
     if(line[0:4]=='PORT'):
-        port=int(line[5:].split('\n')[0]).replace('"','')
+        port=(line[5:].split('\n')[0]).replace('"','')
 	port=int(port)
     if(line[0:4]=='PATH'):
-        path=line[5:].split('\n')[0]
+        wkpath=line[5:].split('\n')[0].replace('"','')
 
 path = "/Users/Shared/Pixologic/GoZBrush/GoZ_ObjectList.txt"
 f=open(path,"r")
 
 asciiFile=f.readline().split('\n')[0]+'.ma'
 
+maName=asciiFile.split('/')
+
+outPath=wkpath+maName[len(maName)-1]
+
+print outPath
+
 maya = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-maya.connect((ip, port))
+maya.connect((ip,port))
 
 mayaCMD='import maya.cmds as cmds'
 mayaCMD+='\n'
 mayaCMD+='print "SENT"'
 mayaCMD+='\n'
-mayaCMD+='cmds.file('+'"'+asciiFile+'"'+',i=True,gr=True,ignoreVersion=True,ra=True,rdn=True,type="mayaAscii")'
+mayaCMD+='cmds.file('+'"'+outPath+'"'+',i=True,gr=True,ignoreVersion=True,ra=True,rdn=True,type="mayaAscii")'
 mayaCMD+='\n'
 mayaCMD+='cmds.spaceLocator(n="GoZID")'
 mayaCMD+='\n'
@@ -40,7 +48,7 @@ mayaCMD+='cmds.select("GoZID")'
 mayaCMD+='\n'
 mayaCMD+='cmds.addAttr( longName="path", dt="string")'
 mayaCMD+='\n'
-mayaCMD+='cmds.setAttr("GoZID.path","'+asciiFile+'",type="string",lock=True)'
+mayaCMD+='cmds.setAttr("GoZID.path","'+outPath+'",type="string",lock=True)'
 
 maya.send(mayaCMD)
 maya.close()
@@ -52,7 +60,7 @@ t2= t1
 try:
     while(t1==t2):
         t2=(os.path.getmtime(asciiFile))
-        print t1,t2
+        #print t1,t2
 except:
     print "NEW"
     while(os.path.isfile(asciiFile)==False):
