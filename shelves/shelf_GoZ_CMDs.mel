@@ -12,7 +12,7 @@ global proc shelf_GoZ_CMDs () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "import maya.cmds as cmds\ntry:\n    cmds.commandPort(cl=True,n=\":6667\")\nexcept:\n    print \"noport\"\nfinally:\n    cmds.commandPort( n=\":6667\",stp=\"python\" )\n\n\n" 
+        -annotation "import maya.cmds as cmds\ntry:\n    cmds.commandPort(cl=True,n=\"129.25.140.197:6667\")\nexcept:\n    print \"noport\"\nfinally:\n    cmds.commandPort( n=\"129.25.140.197:6667\",stp=\"python\" )\n\n\n" 
         -enableBackground 0
         -align "center" 
         -label "import maya.cmds as cmds\ntry:\n    cmds.commandPort(cl=True,n=\":6..." 
@@ -26,7 +26,7 @@ global proc shelf_GoZ_CMDs () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "returnPath =''\n\nimport maya.cmds as cmds\ntry:\n    cmds.commandPort(cl=True,n=\":6667\")\nexcept:\n    print \"noport\"\nfinally:\n    cmds.commandPort( n=\":6667\",stp=\"python\",po=True,nr=True )\n\n\n" 
+        -command "returnPath =''\n\nimport maya.cmds as cmds\ntry:\n    cmds.commandPort(cl=True,n=\"129.25.140.197:6667\")\nexcept:\n    print \"noport\"\nfinally:\n    cmds.commandPort( n=\"129.25.140.197:6667\",stp=\"python\",po=True,nr=True )\n\n\n" 
         -sourceType "python" 
         -commandRepeatable 1
     ;
