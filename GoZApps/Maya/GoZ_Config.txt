@@ -1,0 +1,2 @@
+PATH = "/Users/Shared/Pixologic/GoZApps/Maya/GoZbrushToMaya.py"
+APPS_UNLOCKED = TRUE
