@@ -10,8 +10,11 @@ A network projects folder should be setup ex. /your/network/share/goz_artistname
 
 This folder must contain ch.sh, a GoZBrush folder, GoZBrush/GoZ_Applicaiton.txt, GoZBrushFromMaya.mel, GoZBrushToMaya.mel
 
-*public RSA ssh keys are needed for this to work, they can be made via ssh-keygen -t rsa, ssh-add, and then appended to .ssh/authorized_keys (cat id_rsa.pub >> .ssh/authorized_keys)
-*this requires a standard install of GoZ on OSX, that is setup to work with maya
+*public RSA ssh keys are needed for this to work, 
+they can be made via ssh-keygen -t rsa, ssh-add,  
+and then appended to .ssh/authorized_keys (cat id_rsa.pub >> .ssh/authorized_keys)  
+
+*this requires a standard install of GoZ on OSX, that is setup to work with maya  
 
 ZBrush OSX -> Maya Linux (install):
 -----------------------------------
