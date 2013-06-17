@@ -47,7 +47,7 @@ objList=objList.read().split('\n')
 objout=''
 for obj in objList:
     obj=obj.replace('/Volumes/Projects/','/media/projects/')
-    objout+=obj
+    objout+=obj+'\n'
 
 obj_file_out=open('/Volumes/Projects/goz_default/GoZBrush/GoZ_ObjectList.txt','wb')
 obj_file_out.write(objout)
