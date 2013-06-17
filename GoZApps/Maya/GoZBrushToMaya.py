@@ -7,6 +7,7 @@ import subprocess
 import commands
 from subprocess import Popen
 import ConfigParser
+from shutil import copyfile
 
 ''' replacement script for GoZBrushToMaya '''
 
@@ -44,7 +45,19 @@ objList=open(path,"r")
 
 gozp=goz_base+'/GoZBrush/GoZ_ProjectPath.txt'
 
+objList=objList.read().split('\n')
 
+objout=''
+for obj in objList:
+    obj=obj.replace('/Volumes/Projects/','/media/projects/')
+    objout+=obj
+
+obj_file_out=open('/Volumes/Projects/goz_default/GoZBrush/GoZ_ObjectList.txt','wb')
+
+obj_file_out.write(objout)
+obj_file_out.close()
+
+#copyfile(path,'/Volumes/Projects/goz_default/GoZBrush/GoZObjectList.txt')
 
 ascii_files=[]
 
@@ -52,18 +65,20 @@ for line in objList:
     ascii_files.append(line.split('\n')[0]+'.ma')
 
 
+#source "/Users/Shared/Pixologic/GoZApps/Maya/GoZBrushFromMaya.mel"
+
 mayaCMD=''
 mayaCMD='import maya.cmds as cmds'
 mayaCMD+='\n'
+mayaCMD+='import maya.mel as mel'
+mayaCMD+='\n'
+mayaCMD+='mel.eval(\'source "'+goz_linux_path+'GoZBrushToMaya.mel"\')'
+mayaCMD+='\n'
 mayaCMD+='print "SENT"'
 mayaCMD+='\n'
-mayaCMD+='cmds.spaceLocator(n="GoZID")'
 mayaCMD+='\n'
-mayaCMD+='cmds.select("GoZID")'
 mayaCMD+='\n'
-mayaCMD+='cmds.addAttr( longName="path", dt="string")'
 mayaCMD+='\n'
-mayaCMD+='cmds.setAttr("GoZID.path","'+goz_linux_path+'",type="string",lock=True)'
 mayaCMD+='\n'
 print goz_linux_path
 
@@ -71,7 +86,7 @@ for obj in ascii_files:
     maName=obj.split('/')
     outPath=goz_linux_path+maName[len(maName)-1]
 
-    mayaCMD+='cmds.file('+'"'+outPath+'"'+',i=True,gr=True,ignoreVersion=True,ra=True,rdn=True,type="mayaAscii")'
+    #mayaCMD+='cmds.file('+'"'+outPath+'"'+',i=True,gr=True,ignoreVersion=True,ra=True,rdn=True,type="mayaAscii")'
     mayaCMD+='\n'
 
 print mayaCMD
