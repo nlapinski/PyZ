@@ -2,12 +2,11 @@
 
 import socket
 import os
-import time
 import subprocess
 import commands
 from subprocess import Popen
 import ConfigParser
-from shutil import copyfile
+import time
 
 ''' replacement script for GoZBrushToMaya '''
 
@@ -18,8 +17,6 @@ cfg_path=goz_base+"/GoZApps/Maya/GoZ.cfg"
 config = ConfigParser.RawConfigParser()
 config.read(cfg_path)
 goz_cfg=dict(config.items('GoZ'))
-
-print goz_cfg
 
 goz_linux_path = goz_cfg['goz_linux_path']
 maya_ip = goz_cfg['maya_ip']
@@ -53,19 +50,8 @@ for obj in objList:
     objout+=obj
 
 obj_file_out=open('/Volumes/Projects/goz_default/GoZBrush/GoZ_ObjectList.txt','wb')
-
 obj_file_out.write(objout)
 obj_file_out.close()
-
-#copyfile(path,'/Volumes/Projects/goz_default/GoZBrush/GoZObjectList.txt')
-
-ascii_files=[]
-
-for line in objList:
-    ascii_files.append(line.split('\n')[0]+'.ma')
-
-
-#source "/Users/Shared/Pixologic/GoZApps/Maya/GoZBrushFromMaya.mel"
 
 mayaCMD=''
 mayaCMD='import maya.cmds as cmds'
@@ -76,25 +62,8 @@ mayaCMD+='mel.eval(\'source "'+goz_linux_path+'GoZBrushToMaya.mel"\')'
 mayaCMD+='\n'
 mayaCMD+='print "SENT"'
 mayaCMD+='\n'
-mayaCMD+='\n'
-mayaCMD+='\n'
-mayaCMD+='\n'
-mayaCMD+='\n'
-print goz_linux_path
-
-for obj in ascii_files:
-    maName=obj.split('/')
-    outPath=goz_linux_path+maName[len(maName)-1]
-
-    #mayaCMD+='cmds.file('+'"'+outPath+'"'+',i=True,gr=True,ignoreVersion=True,ra=True,rdn=True,type="mayaAscii")'
-    mayaCMD+='\n'
-
-print mayaCMD
 
 maya = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 maya.connect((maya_ip,int(maya_port)))
-
 maya.send(mayaCMD)
 maya.close()
-
-#subprocess.call(['/Users/Shared/Pixologic/GoZBrush/GoZBrushFromApp.app/Contents/MacOS/GoZBrushFromApp'])
