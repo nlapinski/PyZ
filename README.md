@@ -15,23 +15,15 @@ This folder must contain ch.sh, a GoZBrush folder, GoZBrush/GoZ_Applicaiton.txt,
 
 ZBrush OSX -> Maya Linux (install):
 -----------------------------------
-1.setup ssh pub key and add it to the linux machine
-
-2. create a goz_name folder on a network share
-
-3. move /Users/Shared/Pixologic to Pixologic_bk
-
-5. clone the repo to /Users/Shared
-
-6. symlink the repo to Pixologic
-
-7. copy GoZBrushToMaya.app  into the repo/GoZApps/Maya/ folder (this a standard goz *.app file I cant redistibute it)
-
-8. modify values in GoZ.cfg and GoZ_Config.txt to match your install
-
-9. copy GoZBrushFromApp.app, GoZMakeObjectPath.app, GoZ_Application.txt, GoZ_Config.txt, and the /Scripts folder from the Pixologic_bk
-
-10. modify GoZ_ProjectPath.txt to match your network project folder
+1.setup ssh pub key and add it to the linux machine  
+2. create a goz_name folder on a network share  
+3. move /Users/Shared/Pixologic to Pixologic_bk  
+5. clone the repo to /Users/Shared  
+6. symlink the repo to Pixologic  
+7. copy GoZBrushToMaya.app  into the repo/GoZApps/Maya/ folder (this a standard goz *.app file I cant redistibute it)  
+8. modify values in GoZ.cfg and GoZ_Config.txt to match your install  
+9. copy GoZBrushFromApp.app, GoZMakeObjectPath.app, GoZ_Application.txt, GoZ_Config.txt, and the /Scripts folder from the Pixologic_bk   
+10. modify GoZ_ProjectPath.txt to match your network project folder   
 
 Note:
 GoZBrushToMaya.mel is still used and must be available to the linux machine
