@@ -34,6 +34,6 @@ local obj list (GoZ_ObjectList.txt)
 4. chmod maya ascii files to allow ZBrush acess on OSX side
 5. Start GoZBrushFromApp.app via ssh to load objs from local GoZ data
 
-This works around the issue of ZBrush wanting all files on one local machine
+This works around the issue of ZBrush needing all files on one local machine
 
 
